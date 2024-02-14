@@ -36,7 +36,7 @@
 
 ```
 
-                   gts 1.2.0
+                   gts 1.3.0
     Komut satırı arayüzlü güncel Türkçe sözlük.
 
     Kullanımı: ./gts <argümanlar> "<aranacak kelime>"

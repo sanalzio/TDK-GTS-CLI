@@ -177,6 +177,9 @@ if (argv.includes("-j") || argv.includes("--json") || ops.includes("j")) { conso
 
 // Belirtilen kelimeyi ara.
 process.stdout.write("Kelime aranıyor...");
+for (let opi = 0; opi < argv.length; opi++) {
+    if (argv[opi][0] == "-") { argv.splice(opi,1); }
+}
 let sonucj = search(argv.slice(2).join(" "));
 if(!sonucj || (sonucj.constructor === Array && sonucj[0]===false)){
     // Eğer sonuç bulunamadıysa:
