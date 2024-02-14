@@ -45,13 +45,52 @@ function helpMenu() {
     console.log("");
 }
 
+// İki harf arasındaki uyuşmazlığını hesaplar.
+function uyusmazlik(kelime1, kelime2) {
+    /* Gerekli değişkenleri belirle:
+    * out: kaç kelimenin uyuşmadığını taşıyan değişken.
+    * kucukoglan: kısa olan kelime.
+    * buyukoglan: uzun olan kelime.
+    */
+    let out = 0, kucukoglan, buyukoglan;
+    // Eğer iki kelimeden biri diğerinden uzun ise:
+    if(kelime1.length != kelime2.length) {
+        // Kaç kelime uzunsa out değişkenini o kadar arttır.
+        out+=kelime1.length-kelime2.length<0?kelime2.length-kelime1.length:kelime1.length-kelime2.length;
+        // Kısa olan kelimeyi kucukoglan değişkenine ata.
+        kucukoglan=kelime1.length-kelime2.length<0?kelime1:kelime2;
+        // Uzun olan kelimeyi buyukoglan değişkenine ata.
+        buyukoglan=kelime1.length-kelime2.length<0?kelime2:kelime1;
+    }
+    /* 
+    Eğer iki kelimeden biri diğerinden kısa ise her fazlalık harf için
+    out değişkenini bir arttırdın ama bu ileride sorun çıkartacak
+    bu yüzden o fazlalıkları kırp.
+    */
+    for(let i = 0; buyukoglan && (i < (kelime1.length-kelime2.length<0?kelime1:kelime2).length) && (buyukoglan.length>kucukoglan.length); i++) {
+        if(buyukoglan[i] != kucukoglan[i]) {
+            let na = buyukoglan.split("");
+            na.pop(i)
+        }
+    }
+    // Eğer iki kelime arasında harf uyuşmazlığı var ise out değişkenini bir arttır.
+    for(let i = 0; i < kelime1.length; i++) {
+        if(kelime1[i] != kelime2[i]) {
+            out++;
+        }
+    }
+    // out değişkenini sonuç olarak döndür.
+    return out;
+}
+
 // Arama fonksiyonu.
 function search(
     word, // Aranacak Kelime girdisi.
     jsout=false, // Json çıktısı olarak verilsin mi?
     ) {
+    // Eşleşme aramak için bir döngü kur:
     for (let wji = 0; wji < sj.length; wji++) {
-        // Object'i bri değişkene ata.
+        // Object'i bir değişkene ata.
         const wordj = sj[wji];
         // Object değişkenindeki madde değişkeni ile word eşleşiyor mu?
         if (wordj.madde.toLocaleLowerCase("tr")==word.toLocaleLowerCase("tr") || wordj.madde_duz.toLocaleLowerCase("tr")==word.toLocaleLowerCase("tr")) {
@@ -96,6 +135,15 @@ function search(
             return json;
         }
     }
+    // Eğer hiçbir eşleşme bulunamazsa:
+    for (let wji = 0; wji < sj.length; wji++) {
+        // Object'i bir değişkene ata.
+        const wordj = sj[wji];
+        // Object değişkenindeki madde değişkeni ile word azıcık da osla eşleşiyor mu?
+        if (uyusmazlik(wordj.madde.toLocaleLowerCase("tr"), word.toLocaleLowerCase("tr"))===1 || uyusmazlik(wordj.madde_duz.toLocaleLowerCase("tr"), word.toLocaleLowerCase("tr"))===1) {
+            return [false, wordj.madde];
+        }
+    }
     return false;
 }
 
@@ -129,17 +177,31 @@ if (argv.includes("-j") || argv.includes("--json") || ops.includes("j")) { conso
 
 // Belirtilen kelimeyi ara.
 process.stdout.write("Kelime aranıyor...");
-const sonucj = search(argv.at(-1));
-if(!sonucj){
+let sonucj = search(argv.slice(2).join(" "));
+if(!sonucj || (sonucj.constructor === Array && sonucj[0]===false)){
+    // Eğer sonuç bulunamadıysa:
+    // Eğer benzer bir kelime tespit edildiyse:
+    if (sonucj.constructor === Array && sonucj[0]===false) {
+        // Benzer kelimeyi kelime değişkenine ata.
+        let kelime = sonucj[1];
+        // Arama sonucunu benzer kelime ile değiştir.
+        sonucj = search(kelime);
+        // Satırı "Eşleşme bulunamadı. "<kelime>" sonuçları gösteriliyor." olarak değiştir.
+        process.stdout.clearLine(0);
+        process.stdout.cursorTo(0);
+        process.stdout.write("Eşleşme bulunamadı. \""+kelime+"\" sonuçları gösteriliyor.\n\n");
+    } else { // Eğer tespit edilemediyse satırı "Eşleşme bulunamadı." olarak değiştir ve programı sonlandır.
+        process.stdout.clearLine(0);
+        process.stdout.cursorTo(0);
+        process.stdout.write("Eşleşme bulunamadı.\n");
+        process.exit(0);
+    }
+} else {
+    // Satırı sil.
     process.stdout.clearLine(0);
     process.stdout.cursorTo(0);
-    process.stdout.write("Eşleşme bulunamadı.\n");
-    process.exit(0);
+    process.stdout.write("\n");
 }
-// Satırı sil
-process.stdout.clearLine(0);
-process.stdout.cursorTo(0);
-process.stdout.write("\n");
 
 // * Sonuçları yaz:
 

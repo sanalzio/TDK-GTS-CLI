@@ -1,0 +1,55 @@
+body {
+	background-color: #f8f9fa;
+	color: #333;
+}
+a {
+	color: #444;
+	text-decoration: none;
+}
+a:hover {
+	color: #666;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #333;
+}
+p {
+	color: #555;
+}
+button {
+	background-color: #d1d9e1;
+	color: #333;
+	border: 1px solid #e5e9ec;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+button:hover {
+	background-color: #e5e9ec;
+}
+button:active {
+	background-color: #f2f4f5;
+}
+input {
+	background-color: #d1d9e1;
+	color: #333;
+	border: 1px solid #e5e9ec;
+	padding: 5px;
+	border-radius: 5px;
+}
+input:focus {
+	background-color: #e5e9ec;
+}
+.border {
+	border: 1px solid #e5e9ec;
+}
+.border_radius {
+	border-radius: 1rem;
+}
+.shadow {
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
