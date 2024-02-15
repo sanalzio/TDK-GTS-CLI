@@ -6,6 +6,11 @@
 
 [**Özgür yazılım nedir?**](https://tr.wikipedia.org/wiki/%C3%96zg%C3%BCr_yaz%C4%B1l%C4%B1m)
 
+## Ne değişti?
+- Düz yazma sistemi getirildi yani artık türkçe karakterler yerine ingilizce karakterler yazdığınızda algılayabiliyor.
+  Örnek: `ı` yerine `i` yada `ç` yerine `c`
+- Benzerlik tespit sistemi getirildi. Eğer kelime yanlış yazıldı yada sözlükte bir sonuç bulunamadı ise kendisine enzer bir sözcük arıyor.
+
 ## Kurulum
 [**Buradan**](https://github.com/sanalzio/TDK-GTS-CLI/releases) en güncel sürümü indirip kullanabilirsiniz.
 
