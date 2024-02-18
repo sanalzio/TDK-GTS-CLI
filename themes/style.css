@@ -1,16 +1,100 @@
-body{
-    display: flex;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-top: 5vh;
+body {
+	display: flex;
+	margin: 0;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding-top: 5vh;
+	font-family: system-ui;
 }
 
-#main{
-    width: 90vw;
-    height: 90vh;
-    /* border-width: 10px;
-    border-color: black;
-    border-style: solid; */
+#main {
+	width: 90vw;
+	height: 90vh;
+	display: inline-block;
+	overflow-y: auto;
+}
+
+.anlamt {
+	text-align: left;
+	padding-left: 5vw;
+	margin-bottom: 0;
+	display: block;
+	font-weight: bolder;
+}
+
+.ornekt {
+	text-align: left;
+	padding-left: 7vw;
+	margin-bottom: 0;
+	display: block;
+	font-weight: bolder;
+}
+
+#form{
+	display: flex;
+	justify-content: center;
+}
+
+#wi {
+	outline: none;
+}
+
+#sb {
+	padding: 0;
+	margin-left: 0.1rem;
+	display: none;
+}
+
+#l {
+	animation-name: anim;
+	margin-left: 0.1rem;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	/* display: none; */
+}
+
+@keyframes anim {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.anlam {
+	padding-right: 2.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.ornekt {
+	margin-top: 0.5rem;
+	color: #778899;
+}
+
+.ornek {
+	color: #a7b1bb;
+}
+
+::selection {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+#main::-webkit-scrollbar {
+	width: 0.4rem;
+}
+
+#main::-webkit-scrollbar-track {
+	background: rgba(0,0,0,0);
+}
+
+#main::-webkit-scrollbar-thumb {
+	background-color: #4d5b66;
+	border-radius: 1rem;
+}
+
+#nofound{
+	color: #ff392e;
+	display: none;
 }

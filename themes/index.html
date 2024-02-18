@@ -3,17 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dark.css">
-    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <title>TDK-GTS</title>
+    <script src="script.js" type="module"></script>
 </head>
 <body>
     <div id="main" class="border shadow border_radius">
-        <h1>Dürk Dil Kurumu<br>Güncel Türkçe Sözlük</h1>
-        <h2 id="word" style="text-align: left;padding-left: 5vw;">Kelime:</h2>
+        <h1>Türk Dil Kurumu<br>Güncel Türkçe Sözlük</h1>
+        <div id="form">
+            <input type="text" id="wi" class="shadow" placeholder="Kelime">
+            <img id="l" src="./l.svg" alt="loading" width="29rem">
+            <button id="sb" class="shadow"><img src="./sb.svg" alt="aramaDugmesi" width="29rem"></button>
+        </div>
+        <h1 id="nofound">Eşleşme Bulunamadı</h1>
+        <h2 id="wordh" style="text-align: left;padding-left: 5vw;">Kelime: <span id="word">Merhaba</span></h2>
         <div id="anlams" style="padding-left: 2vw;">
-            <h3 class="anlam" style="text-align: left;padding-left: 5vw;">1. </h3>
+            <div class="anlam" id="anlam1">
+                <span class="anlamt">1. Selam</span>
+                <span class="ornekt">Örnek: <span class="ornek">Sıkı fıkı dostluklarını değil, şöyle uzaktan bile merhabalarını istemiyorum.</span></span>
+            </div>
+            <div class="anlam" id="anlam2">
+                <span class="anlamt">2. (me'rhaba:) `Geniş ve mamur yere geldiniz, rahat ediniz, günaydın, hoş geldiniz` anlamlarında bir esenleşme veya selamlaşma sözü</span>
+                <span class="ornekt">Örnek: <span class="ornek">Merhaba, arkadaş! Hoş geldiniz.</span></span>
+            </div>
         </div>
     </div>
 </body>
